@@ -76,12 +76,19 @@ const displayMovement = function (movements) {
 };
 displayMovement(account1.movements);
 
-let movements = [200, 450, -400, 3000, -650, -130, 70, 1300];
-const eurToUsd = 1.1 ; 
-const movementsUSD = movements.map(mov => mov*eurToUsd);
-console.log(movements);
-console.log(movementsUSD);
+const user = 'Steven Thomas Williams';
+const userName =  user.toLowerCase().split(' ').map(name => name[0]).join('');
+console.log(userName);
 
-const movementDescription = movements.map((mov,i,arr)=> 
-`Movement ${i+1}: You ${mov > 0 ? 'deposited':'withdrew'} ${mov}`);
-console.log(movementDescription);
+
+// let movements = [200, 450, -400, 3000, -650, -130, 70, 1300];
+// const eurToUsd = 1.1 ; 
+// const movementsUSD = movements.map(mov => mov*eurToUsd);
+// console.log(movements);
+// console.log(movementsUSD);
+
+// const movementDescription = movements.map((mov,i,arr)=> 
+// `Movement ${i+1}: You ${mov > 0 ? 'deposited':'withdrew'} ${mov}`);
+// console.log(movementDescription);
+
+
