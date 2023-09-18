@@ -75,20 +75,33 @@ const displayMovement = function (movements) {
   });
 };
 displayMovement(account1.movements);
+//Compute usernames
+const createUsernames = function (accs){
+  accs.forEach(function(acc){
+    acc.userName = acc.owner.toLowerCase().split(' ').map(name => name[0]).join('');
+  })
+};
+createUsernames(accounts);
+console.log(accounts);
 
-const user = 'Steven Thomas Williams';
-const userName =  user.toLowerCase().split(' ').map(name => name[0]).join('');
-console.log(userName);
 
 
-// let movements = [200, 450, -400, 3000, -650, -130, 70, 1300];
-// const eurToUsd = 1.1 ; 
-// const movementsUSD = movements.map(mov => mov*eurToUsd);
-// console.log(movements);
-// console.log(movementsUSD);
+const movements = [200, 450, -400, 3000, -650, -130, 70, 1300];
+const deposits = movements.filter(function(mov){
+  return mov > 0;
+})
+const withdraws = movements.filter(mov => mov < 0);
+console.log(deposits);
+console.log(withdraws);
 
-// const movementDescription = movements.map((mov,i,arr)=> 
-// `Movement ${i+1}: You ${mov > 0 ? 'deposited':'withdrew'} ${mov}`);
-// console.log(movementDescription);
+
+const eurToUsd = 1.1 ;
+const movementsUSD = movements.map(mov => mov*eurToUsd);
+console.log(movements);
+console.log(movementsUSD);
+
+const movementDescription = movements.map((mov,i,arr)=> 
+`Movement ${i+1}: You ${mov > 0 ? 'deposited':'withdrew'} ${mov}`);
+console.log(movementDescription);
 
 
