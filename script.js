@@ -62,6 +62,7 @@ const inputLoanAmount = document.querySelector('.form__input--loan-amount');
 const inputCloseUsername = document.querySelector('.form__input--user');
 const inputClosePin = document.querySelector('.form__input--pin');
 
+//Display movements
 const displayMovement = function (movements) {
   containerMovements.innerHTML = '';
   movements.forEach(function(mov,i){
@@ -75,6 +76,7 @@ const displayMovement = function (movements) {
   });
 };
 displayMovement(account1.movements);
+
 //Compute usernames
 const createUsernames = function (accs){
   accs.forEach(function(acc){
@@ -82,10 +84,15 @@ const createUsernames = function (accs){
   })
 };
 createUsernames(accounts);
-console.log(accounts);
 
+//Calculate and Display balance
+const calcDisplayBalance = function(movements){
+  const balance = movements.reduce((acc,mov)=> acc+mov,0);
+  labelBalance.innerHTML = `${balance}$`;
+}
+calcDisplayBalance(account1.movements);
 
-
+//---testing with Array methods
 const movements = [200, 450, -400, 3000, -650, -130, 70, 1300];
 const deposits = movements.filter(function(mov){
   return mov > 0;
@@ -105,3 +112,9 @@ const movementDescription = movements.map((mov,i,arr)=>
 console.log(movementDescription);
 
 
+const balance = movements.reduce((acc,cur) => acc+cur , 0);
+console.log(balance);
+
+//Maximum value
+const max= movements.reduce((acc,cur)=> acc>cur ? acc : cur, movements[0]);
+console.log(max);
