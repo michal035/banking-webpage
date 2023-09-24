@@ -6,11 +6,16 @@ Build the image
 
 Start the Flask server
 
-```docker run -p 80:5000 flask-app```
+```docker run -p 5000:5000 flask-app```
 
 Start db
 
 ```sudo docker-compose up -d```
+
+
+Start all
+
+```docker-compose up --build```
 
 
 'Login' to the database:
