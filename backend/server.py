@@ -18,26 +18,26 @@ app = Flask(__name__)
 CORS(app)
 
 
-@app.route("/get/all", methods=["GET"])
-def get():
+@app.route("/login", methods=["GET"])
+def get_user_information():
 
-    cursor.execute("SELECT * FROM accounts;")
+    data = request.get_json()
+    name = data.get('username')
 
+    cursor.execute(f"""SELECT account_id, owner,balance,interest_rate FROM accounts 
+                   where owner = {name};""")
     conn.commit()
-    result = cursor.fetchall()
 
-    return jsonify(result), 200
+    user_data = cursor.fetchall()
+    user_id = user_data[0][0]
 
+    cursor.execute(f"""SELECT tr.amount FROM transactions tr
+                   where account_id = {user_id};""")
+    conn.commit()
 
-@app.route("/get/<username>/", methods=["GET"])
-def get_u(username):
+    transaction_data = cursor.fetchall()
 
-    return jsonify({"res": "ress"}), 200
-
-
-@app.route('/create_user', methods=['POST'])
-def create_user():
-    return jsonify({'message': 'Failed to add user'}), 500
+    return jsonify({"user_data": user_data, "transaction_history": transaction_data}), 200
 
 
 if __name__ == '__main__':
