@@ -92,6 +92,17 @@ const calcDisplayBalance = function(movements){
 }
 calcDisplayBalance(account1.movements);
 
+const calcDisplaySummary = function (movements){
+  const incomes = movements.filter(mov => mov>0).reduce((acc,mov)=>acc+mov,0);
+  labelSumIn.textContent = `${incomes}€`
+  const out = movements.filter(mov => mov <0).reduce((acc,mov) => acc+mov,0);
+  labelSumOut.textContent = `${Math.abs(out)}€`
+  const interest = movements.filter(mov => mov>0).map(deposit => deposit * 0.012).filter(int => int >= 1).reduce((acc,interest) => acc + interest, 0);
+  labelSumInterest.textContent = `${interest}€`;
+};
+calcDisplaySummary(account1.movements);
+
+
 //---testing with Array methods
 const movements = [200, 450, -400, 3000, -650, -130, 70, 1300];
 const deposits = movements.filter(function(mov){
@@ -118,3 +129,8 @@ console.log(balance);
 //Maximum value
 const max= movements.reduce((acc,cur)=> acc>cur ? acc : cur, movements[0]);
 console.log(max);
+
+//PIPELINE
+const totalDepositUSD = movements.filter(mov=>mov>0).map(mov=>mov * eurToUsd).reduce((acc,curr)=> acc+curr,0)
+console.log(totalDepositUSD);
+
