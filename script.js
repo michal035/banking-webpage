@@ -134,3 +134,17 @@ btnLogin.addEventListener('click', function (e) {
     calcDisplaySummary(currentAccount);
     }
 });
+
+btnTransfer.addEventListener('click',function(e){
+  e.preventDefault();
+  const amount = Number(inputTransferAmount.value);
+  const receiverAccount = accounts.find(acc => acc.userName === inputTransferTo.value);
+  console.log(receiverAccount, amount);
+  currentAccount.movements.push(-amount);
+  //Current account display movement, balance, summary
+  displayMovements(currentAccount.movements);
+  calcDisplayBalance(currentAccount.movements);
+  calcDisplaySummary(currentAccount); 
+  //Display receiver account
+ 
+});
