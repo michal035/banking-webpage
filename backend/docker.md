@@ -21,3 +21,7 @@ Start all
 'Login' to the database:
 
 ```docker-compose exec postgres psql -U postgres -d user_information```
+
+restore db
+
+```docker-compose exec postgres psql -U postgres -d user_information < user_information_backup.sql```
